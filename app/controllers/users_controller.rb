@@ -1,11 +1,17 @@
 class UsersController < ApplicationController
 
+
+  def index
+    @users = User.all
+    render json: @users
+  end
+
   def create
-    @user = User.new(user_params)
+    @user = User.new(name: params[:name], username: params[:username], password: params[:password])
     if @user.save
       render json: @user
     else
-      render json: { error: 'WRONG'}, status: 422}
+      render json: { error: 'WRONG'}, status: 422
     end
   end
 
